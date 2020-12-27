@@ -3,6 +3,8 @@ import { CreateUserDto } from '../dtos/users.dto';
 import { RequestWithUser } from '../interfaces/auth.interface';
 import { User } from '../interfaces/users.interface';
 import AuthService from '../services/auth.service';
+import { GenericResponse } from '../utils/genericResponse';
+import { GenericResult } from '../utils/genericResult';
 
 class AuthController {
   public authService = new AuthService();
@@ -21,10 +23,13 @@ class AuthController {
   public logIn = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const userData: CreateUserDto = req.body;
-      const { cookie, findUser } = await this.authService.login(userData);
-
+      const { cookie, findUser, token } = await this.authService.login(userData);
+      const genericResponse: GenericResponse<any> = {
+        data: token,
+        result: { resultType: token ? 'SUCCESS' : 'ERROR', description: null, resultCode: null },
+      };
       res.setHeader('Set-Cookie', [cookie]);
-      res.status(200).json({ data: findUser, message: 'login' });
+      res.status(200).json(genericResponse);
     } catch (error) {
       next(error);
     }
