@@ -1,8 +1,8 @@
 {
   "name": "every-note",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "TypeScript + TypeORM + PostgreSQL + Express API Server",
-  "author": "",
+  "author": "Kursat Coskun",
   "license": "ISC",
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production node build/server.js",
