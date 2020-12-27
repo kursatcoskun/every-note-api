@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { IsNotEmpty } from 'class-validator';
 import { User } from '../interfaces/users.interface';
+import { NotebookEntity } from './notebook.entity';
 
 @Entity()
 @Unique(['email'])
@@ -23,4 +24,7 @@ export class UserEntity implements User {
   @Column()
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => NotebookEntity, note => note.id)
+  notebooks: NotebookEntity[];
 }

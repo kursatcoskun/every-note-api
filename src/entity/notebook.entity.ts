@@ -3,7 +3,7 @@ import { BaseEntity, ChildEntity, Column, Entity, JoinColumn, ManyToOne, Primary
 import { UserEntity } from './users.entity';
 
 @Entity()
-export class NotebookEntity extends BaseEntity {
+export class NotebookEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,6 +12,9 @@ export class NotebookEntity extends BaseEntity {
   name: string;
 
   @JoinColumn({ name: 'userId' })
-  @ManyToOne(type => UserEntity, userEntity => userEntity.id)
+  @ManyToOne(type => UserEntity, userEntity => userEntity, { nullable: false })
   user: UserEntity;
+
+  @Column()
+  public userId: number;
 }

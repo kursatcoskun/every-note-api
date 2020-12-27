@@ -1,5 +1,5 @@
 export class GenericResult {
-  resultCode: number;
+  resultCode?: number;
   resultType: string;
-  description: string;
+  description?: string;
 }
