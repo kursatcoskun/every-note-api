@@ -3,7 +3,6 @@ import { IsNotEmpty, IsNumber } from 'class-validator';
 
 @Exclude()
 export class NotebookDto {
-  @IsNotEmpty()
   @Expose()
   id: number;
 

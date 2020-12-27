@@ -17,6 +17,7 @@ class NotebookRoute implements Route {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/getNotebooksByUserId/:id(\\d+)`, this.notebookController.getNotebooksByUserId);
+    this.router.post(`${this.path}/createNotebook`, this.notebookController.createNotebook);
   }
 }
 

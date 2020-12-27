@@ -1,23 +1,27 @@
 import { classToPlain, plainToClass } from 'class-transformer';
 import { getRepository } from 'typeorm';
 import { NotebookDto } from '../dtos/notebook.dto';
-import { NotebookEntity } from '../entity';
+import { NotebookEntity, UserEntity } from '../entity';
 import HttpException from '../exceptions/HttpException';
 
 export class NotebookService {
   public notebookEntity = NotebookEntity;
+  public userEntity = UserEntity;
 
   public async getNotebooksByUserId(userId: number): Promise<NotebookEntity[]> {
     const notebookRepository = getRepository(this.notebookEntity);
-    const notebooks = await notebookRepository.find({ where: { id: userId } });
-
+    const notebooks = await notebookRepository.find({ where: { user: { id: userId } }});
     return notebooks;
   }
 
   public async createNotebook(notebookDto: NotebookDto): Promise<NotebookDto> {
-    const notebookEntity = plainToClass(NotebookEntity, notebookDto);
+    const notebookEntity: NotebookEntity = plainToClass(NotebookEntity, notebookDto);
+    const userRepository = getRepository(this.userEntity);
+    const user = await userRepository.findOne({ where: { id: notebookDto.userId } });
     const notebookRepository = getRepository(this.notebookEntity);
-    const createdNotebook = await notebookRepository.create(notebookEntity);
+    console.log(notebookEntity);
+    const createdNotebook = await notebookRepository.save({ ...notebookEntity, user });
+    console.log(createdNotebook);
     if (!createdNotebook) throw new HttpException(500, 'Notebook can not created.');
     return plainToClass(NotebookDto, createdNotebook);
   }
