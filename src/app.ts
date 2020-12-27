@@ -78,8 +78,9 @@ class App {
     const options = {
       swaggerDefinition: {
         info: {
-          title: 'REST API',
+          title: 'Every Note API',
           version: '1.0.0',
+          author: 'Kursat Coskun',
           description: 'Example docs',
         },
       },
