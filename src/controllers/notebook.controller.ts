@@ -1,12 +1,8 @@
-import { Resolver } from 'dns';
 import { NextFunction, Request, Response } from 'express';
 import { NotebookDto } from '../dtos/notebook.dto';
-import { CreateUserDto } from '../dtos/users.dto';
 import { NotebookEntity } from '../entity';
-import { User } from '../interfaces/users.interface';
 import { NotebookService } from '../services';
 import { GenericResponse } from '../utils/genericResponse';
-import { GenericResult } from '../utils/genericResult';
 
 export class NotebookController {
   public notebookService = new NotebookService();
