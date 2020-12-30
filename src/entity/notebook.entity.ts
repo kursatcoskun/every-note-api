@@ -12,7 +12,7 @@ export class NotebookEntity {
   name: string;
 
   @JoinColumn({ name: 'userId' })
-  @ManyToOne(type => UserEntity, userEntity => userEntity, { nullable: false })
+  @ManyToOne(() => UserEntity, userEntity => userEntity, { nullable: false })
   user: UserEntity;
 
   @Column()
