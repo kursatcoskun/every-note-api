@@ -39,6 +39,17 @@ export class NotebookController {
       next(error);
     }
   };
+
+  public deleteNotebook = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const notebookId = req.params.id;
+      const isDeleted = await this.notebookService.deleteNotebook(Number(notebookId));
+      const genericResponse: GenericResponse<null> = { data: null, result: { resultType: isDeleted ? 'SUCCESS' : 'ERROR' } };
+      res.status(200).json(genericResponse);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default NotebookController;

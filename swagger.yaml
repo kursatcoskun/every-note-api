@@ -1,13 +1,15 @@
 tags:
-- name: users
-  description: users API
+  - name: users
+    description: users API
+  - name: notebook
+    description: notebook entity related API's
 
 paths:
-# [GET] users
+  # [GET] users
   /users:
     get:
       tags:
-      - users
+        - users
       summary: Find All Users
       responses:
         200:
@@ -15,18 +17,18 @@ paths:
         500:
           description: 'Server Error'
 
-# [POST] users
+    # [POST] users
     post:
       tags:
-      - users
+        - users
       summary: Add User
       parameters:
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: '#/definitions/users'
       responses:
         201:
           description: 'Created'
@@ -37,18 +39,18 @@ paths:
         500:
           description: 'Server Error'
 
-# [GET] users/id
+  # [GET] users/id
   /users/{id}:
     get:
       tags:
-      - users
+        - users
       summary: Find User By Id
       parameters:
-      - name: id
-        in: path
-        description: User Id
-        required: true
-        type: integer
+        - name: id
+          in: path
+          description: User Id
+          required: true
+          type: integer
       responses:
         200:
           description: 'OK'
@@ -57,23 +59,23 @@ paths:
         500:
           description: 'Server Error'
 
-# [PUT] users/id
+    # [PUT] users/id
     put:
       tags:
-      - users
+        - users
       summary: Update User By Id
       parameters:
-      - name: id
-        in: path
-        description: user Id
-        required: true
-        type: integer
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
+        - name: id
+          in: path
+          description: user Id
+          required: true
+          type: integer
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: '#/definitions/users'
       responses:
         200:
           description: 'OK'
@@ -84,20 +86,100 @@ paths:
         500:
           description: 'Server Error'
 
-# [DELETE] users/id
+    # [DELETE] users/id
     delete:
       tags:
-      - users
+        - users
       summary: Delete User By Id
       parameters:
-      - name: id
-        in: path
-        description: user Id
-        required: true
-        type: integer
+        - name: id
+          in: path
+          description: user Id
+          required: true
+          type: integer
       responses:
         200:
           description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [GET] notebooks by UserId
+  /notebook/getNotebooksByUserId/{id}:
+    get:
+      tags:
+        - notebook
+      summary: Find All Notebooks by UserId
+      parameters:
+        - name: id
+          in: path
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+  # [POST] createNotebook
+  /notebook/createNotebook:
+    post:
+      tags:
+        - notebook
+      summary: Add Notebook
+      parameters:
+        - name: body
+          in: body
+          description: notebookDto
+          required: true
+          schema:
+            $ref: '#/definitions/notebookDto'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [PUT] update Notebook
+  /notebook/updateNotebook:
+    put:
+      tags:
+        - notebook
+      summary: Update Notebook
+      parameters:
+        - name: body
+          in: body
+          description: notebookDto
+          required: true
+          schema:
+            $ref: '#/definitions/notebookDto'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [DELETE] delete Notebook
+  /notebook/deleteNotebook/{id}:
+    delete:
+      tags:
+        - notebook
+      summary: Delete Notebook
+      parameters:
+        - name: id
+          in: path
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
         409:
           description: 'Conflict'
         500:
@@ -108,8 +190,8 @@ definitions:
   users:
     type: object
     required:
-        - email
-        - password
+      - email
+      - password
     properties:
       id:
         type: integer
@@ -121,6 +203,23 @@ definitions:
         type: string
         description: user Password
 
+  notebookDto:
+    type: object
+    required:
+      - id
+      - userId
+      - name
+    properties:
+      id:
+        type: integer
+        description: Id
+      userId:
+        type: integer
+        description: user Id
+      name:
+        type: string
+        description: user name
+
 schemes:
- - https
- - http
+  - https
+  - http
