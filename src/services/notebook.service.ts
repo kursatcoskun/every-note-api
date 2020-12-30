@@ -36,8 +36,7 @@ export class NotebookService {
 
   public async deleteNotebook(notebookId: number): Promise<any> {
     const notebookRepository = getRepository(this.notebookEntity);
-    const notebookEntity = notebookRepository.findOne({ where: { id: notebookId } });
-    console.log(notebookEntity);
+    const notebookEntity = await notebookRepository.findOne({ where: { id: notebookId } });
     if (!notebookEntity) throw new HttpException(404, 'Notebook can not be found. Notebook ID: ' + notebookId);
 
     const deleted = await notebookRepository.delete({ id: notebookId });
