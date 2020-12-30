@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { BaseEntity, ChildEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { UserEntity } from './users.entity';
 
 @Entity()
@@ -12,7 +12,7 @@ export class NotebookEntity {
   name: string;
 
   @JoinColumn({ name: 'userId' })
-  @ManyToOne(type => UserEntity, userEntity => userEntity, { nullable: false })
+  @ManyToOne(() => UserEntity, userEntity => userEntity, { nullable: false })
   user: UserEntity;
 
   @Column()
