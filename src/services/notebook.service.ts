@@ -1,4 +1,4 @@
-import { classToPlain, plainToClass } from 'class-transformer';
+import { plainToClass } from 'class-transformer';
 import { getRepository } from 'typeorm';
 import { NotebookDto } from '../dtos/notebook.dto';
 import { NotebookEntity, UserEntity } from '../entity';
@@ -10,8 +10,7 @@ export class NotebookService {
 
   public async getNotebooksByUserId(userId: number): Promise<NotebookEntity[]> {
     const notebookRepository = getRepository(this.notebookEntity);
-    const notebooks = await notebookRepository.find({ where: { user: { id: userId } } });
-    return notebooks;
+    return await notebookRepository.find({ where: { user: { id: userId } } });
   }
 
   public async createNotebook(notebookDto: NotebookDto): Promise<NotebookDto> {
@@ -19,9 +18,7 @@ export class NotebookService {
     const userRepository = getRepository(this.userEntity);
     const user = await userRepository.findOne({ where: { id: notebookDto.userId } });
     const notebookRepository = getRepository(this.notebookEntity);
-    console.log(notebookEntity);
     const createdNotebook = await notebookRepository.save({ ...notebookEntity, user });
-    console.log(createdNotebook);
     if (!createdNotebook) throw new HttpException(500, 'Notebook can not created.');
     return plainToClass(NotebookDto, createdNotebook);
   }
