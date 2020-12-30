@@ -10,7 +10,7 @@ export class NotebookService {
 
   public async getNotebooksByUserId(userId: number): Promise<NotebookEntity[]> {
     const notebookRepository = getRepository(this.notebookEntity);
-    const notebooks = await notebookRepository.find({ where: { user: { id: userId } }});
+    const notebooks = await notebookRepository.find({ where: { user: { id: userId } } });
     return notebooks;
   }
 
@@ -37,11 +37,12 @@ export class NotebookService {
   public async deleteNotebook(notebookId: number): Promise<any> {
     const notebookRepository = getRepository(this.notebookEntity);
     const notebookEntity = notebookRepository.findOne({ where: { id: notebookId } });
+    console.log(notebookEntity);
     if (!notebookEntity) throw new HttpException(404, 'Notebook can not be found. Notebook ID: ' + notebookId);
 
     const deleted = await notebookRepository.delete({ id: notebookId });
 
-    return deleted ? true : false;
+    return !!deleted;
   }
 }
 
