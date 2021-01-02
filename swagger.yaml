@@ -187,6 +187,87 @@ paths:
         500:
           description: 'Server Error'
 
+  # [GET] notes by NotebookId
+  /note/getNotesByNotebookId/{id}:
+    get:
+      tags:
+        - note
+      summary: Find All notes by NotebookId
+      parameters:
+        - name: id
+          in: path
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+  # [POST] createNote
+  /note/createNote:
+    post:
+      tags:
+        - note
+      summary: Add Note
+      parameters:
+        - name: body
+          in: body
+          description: noteDto
+          required: true
+          schema:
+            $ref: '#/definitions/noteDto'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [PUT] update Note
+  /note/updateNote:
+    put:
+      tags:
+        - note
+      summary: Update Note
+      parameters:
+        - name: body
+          in: body
+          description: noteDto
+          required: true
+          schema:
+            $ref: '#/definitions/noteDto'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [DELETE] delete Note
+  /note/deleteNote/{id}:
+    delete:
+      tags:
+        - note
+      summary: Delete Note
+      parameters:
+        - name: id
+          in: path
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+
 # definitions
 definitions:
   users:
