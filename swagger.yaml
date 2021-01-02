@@ -3,6 +3,8 @@ tags:
     description: users API
   - name: notebook
     description: notebook entity related API's
+  - name: note
+    description: note entity related API's
 
 paths:
   # [GET] users
@@ -219,6 +221,27 @@ definitions:
       name:
         type: string
         description: user name
+
+  noteDto:
+    type: object
+    required:
+      - id
+      - notebookId
+      - title
+      - details
+    properties:
+      id:
+        type: integer
+        description: Id
+      notebookId:
+        type: integer
+        description: notebook Id
+      title:
+        type: string
+        description: title for note
+      details:
+        type: string
+        description: details for note
 
 schemes:
   - https

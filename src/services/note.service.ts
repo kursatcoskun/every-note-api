@@ -32,7 +32,7 @@ export class NoteService {
     return plainToClass(NoteDto, updatedNote);
   }
 
-  public async deleteNote(noteId: number): Promise<Boolean> {
+  public async deleteNote(noteId: number): Promise<boolean> {
     const noteRepository = getRepository(this.noteEntity);
     const noteEntity = await noteRepository.findOne({ where: { id: noteId } });
     if (!noteEntity) throw new HttpException(404, 'Note can not be found. Note ID: ' + noteId);

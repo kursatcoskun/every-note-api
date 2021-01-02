@@ -11,6 +11,10 @@ export class NoteEntity {
   @IsNotEmpty()
   title: string;
 
+  @Column()
+  @IsNotEmpty()
+  detail: string;
+
   @JoinColumn({ name: 'notebookId' })
   @ManyToOne(() => NotebookEntity, notebookEntity => notebookEntity, { nullable: false })
   notebook: NotebookEntity;

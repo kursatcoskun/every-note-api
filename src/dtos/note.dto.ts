@@ -1,5 +1,5 @@
-import { Exclude, Expose } from "class-transformer";
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { Exclude, Expose } from 'class-transformer';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 @Exclude()
 export class NoteDto {
@@ -9,6 +9,10 @@ export class NoteDto {
   @Expose()
   @IsNotEmpty()
   title: string;
+
+  @Expose()
+  @IsNotEmpty()
+  details: string;
 
   @Expose()
   @IsNumber()
