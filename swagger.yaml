@@ -233,7 +233,7 @@ definitions:
       id:
         type: integer
         description: Id
-      userId:
+      notebookId:
         type: integer
         description: notebook Id
       title:
