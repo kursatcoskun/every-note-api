@@ -1,4 +1,15 @@
 
+# Technologies I Use
+
+- Node.JS
+- Express.JS
+- TypeScript
+- TypeORM
+- PostgreSQL
+- Swagger
+
+# Project Structure
+
 ```
 every-note
 ├─ .dockerignore
