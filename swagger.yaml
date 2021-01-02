@@ -1,10 +1,12 @@
 tags:
   - name: users
-    description: users API
+    description: user entity related API's
   - name: notebook
     description: notebook entity related API's
   - name: note
     description: note entity related API's
+  - name: auth
+    description: auth related API's
 
 paths:
   # [GET] users
@@ -267,6 +269,52 @@ paths:
         500:
           description: 'Server Error'
 
+   # [POST] Sign Up
+  /signup:
+    post:
+      tags:
+        - auth
+      summary: Sign Up User
+      parameters:
+        - name: body
+          in: body
+          description: createUserDto
+          required: true
+          schema:
+            $ref: '#/definitions/createUserDto'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+   # [POST] Login
+  /login:
+    post:
+      tags:
+        - auth
+      summary: Login User
+      parameters:
+        - name: body
+          in: body
+          description: createUserDto
+          required: true
+          schema:
+            $ref: '#/definitions/createUserDto'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
 
 # definitions
 definitions:
@@ -323,6 +371,17 @@ definitions:
       details:
         type: string
         description: details for note
+
+  createUserDto:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+      password:
+        type: string
 
 schemes:
   - https
